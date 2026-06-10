@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         'X-Title': 'Pikmi'
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.2-11b-vision-instruct:free',
+        model: 'qwen/qwen2.5-vl-72b-instruct:free',
         messages: [{
           role: 'user',
           content: [
