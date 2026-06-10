@@ -6,242 +6,52 @@
   <title>Pikmi — Elige tu mejor foto</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #fdf6f9;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-      color: #1a1a1a;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .logo {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: -1px;
-      color: #1a1a1a;
-    }
-
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fdf6f9; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem; color: #1a1a1a; }
+    header { text-align: center; margin-bottom: 2.5rem; }
+    .logo { font-size: 2.2rem; font-weight: 700; letter-spacing: -1px; color: #1a1a1a; }
     .logo span { color: #D4537E; }
-
-    .tagline {
-      font-size: 1rem;
-      color: #888;
-      margin-top: 6px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 2rem;
-      width: 100%;
-      max-width: 620px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
-      margin-bottom: 1.5rem;
-    }
-
-    .upload-zone {
-      border: 2px dashed #f0c0d0;
-      border-radius: 14px;
-      padding: 2.5rem 1rem;
-      text-align: center;
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
-      background: #fffafc;
-    }
-
+    .tagline { font-size: 1rem; color: #888; margin-top: 6px; }
+    .card { background: white; border-radius: 20px; padding: 2rem; width: 100%; max-width: 620px; box-shadow: 0 2px 20px rgba(0,0,0,0.07); margin-bottom: 1.5rem; }
+    .upload-zone { border: 2px dashed #f0c0d0; border-radius: 14px; padding: 2.5rem 1rem; text-align: center; cursor: pointer; transition: background 0.15s, border-color 0.15s; background: #fffafc; }
     .upload-zone:hover { background: #fff0f5; border-color: #D4537E; }
-
     .upload-zone .icon { font-size: 2.5rem; margin-bottom: 10px; }
-
-    .upload-zone p {
-      font-size: 0.95rem;
-      color: #999;
-      margin-top: 6px;
-    }
-
-    .upload-zone strong {
-      display: block;
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 4px;
-    }
-
+    .upload-zone p { font-size: 0.95rem; color: #999; margin-top: 6px; }
+    .upload-zone strong { display: block; font-size: 1rem; color: #555; margin-bottom: 4px; }
     #fileInput { display: none; }
-
-    .photos-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 1.5rem 0;
-    }
-
-    .photo-card {
-      position: relative;
-      aspect-ratio: 1;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 3px solid transparent;
-      transition: border-color 0.2s;
-    }
-
-    .photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
+    .photos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1.5rem 0; }
+    .photo-card { position: relative; aspect-ratio: 1; border-radius: 12px; overflow: hidden; border: 3px solid transparent; transition: border-color 0.2s; }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .photo-card.winner { border-color: #D4537E; }
-
-    .photo-card .best-badge {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: #D4537E;
-      color: white;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 9px;
-      border-radius: 20px;
-      display: none;
-    }
-
+    .photo-card .best-badge { position: absolute; top: 8px; right: 8px; background: #D4537E; color: white; font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 20px; display: none; }
     .photo-card.winner .best-badge { display: block; }
-
-    .photo-card .remove-btn {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: rgba(0,0,0,0.45);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 26px;
-      height: 26px;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-    }
-
-    .btn-analyze {
-      width: 100%;
-      padding: 15px;
-      background: #D4537E;
-      color: white;
-      border: none;
-      border-radius: 14px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: opacity 0.15s, transform 0.1s;
-    }
-
+    .photo-card .remove-btn { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.45); color: white; border: none; border-radius: 50%; width: 26px; height: 26px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .btn-analyze { width: 100%; padding: 15px; background: #D4537E; color: white; border: none; border-radius: 14px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s, transform 0.1s; }
     .btn-analyze:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
     .btn-analyze:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-
-    .result-card {
-      background: white;
-      border-radius: 20px;
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 620px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
-      display: none;
-    }
-
+    .result-card { background: white; border-radius: 20px; padding: 1.5rem; width: 100%; max-width: 620px; box-shadow: 0 2px 20px rgba(0,0,0,0.07); display: none; }
     .result-card.visible { display: block; }
-
-    .result-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
+    .result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .result-header .trophy { font-size: 1.5rem; }
-
-    .result-header strong {
-      font-size: 1.05rem;
-      color: #D4537E;
-    }
-
-    .result-reason {
-      font-size: 0.95rem;
-      color: #555;
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
-    }
-
-    .scores-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .score-item {
-      background: #fdf6f9;
-      border-radius: 12px;
-      padding: 12px 8px;
-      text-align: center;
-    }
-
-    .score-item .num {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #ccc;
-    }
-
+    .result-header strong { font-size: 1.05rem; color: #D4537E; }
+    .result-reason { font-size: 0.95rem; color: #555; line-height: 1.7; margin-bottom: 1.2rem; }
+    .scores-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .score-item { background: #fdf6f9; border-radius: 12px; padding: 12px 8px; text-align: center; }
+    .score-item .num { font-size: 1.4rem; font-weight: 700; color: #ccc; }
     .score-item.best .num { color: #D4537E; }
-
-    .score-item .label {
-      font-size: 11px;
-      color: #aaa;
-      margin-top: 3px;
-      line-height: 1.4;
-    }
-
+    .score-item .label { font-size: 11px; color: #aaa; margin-top: 3px; line-height: 1.4; }
     .dots { display: inline-flex; gap: 5px; }
-    .dots span {
-      width: 7px; height: 7px;
-      background: white;
-      border-radius: 50%;
-      animation: bounce 0.8s ease-in-out infinite;
-    }
+    .dots span { width: 7px; height: 7px; background: white; border-radius: 50%; animation: bounce 0.8s ease-in-out infinite; }
     .dots span:nth-child(2) { animation-delay: 0.15s; }
     .dots span:nth-child(3) { animation-delay: 0.3s; }
     @keyframes bounce { 0%,80%,100%{transform:scale(0.5)} 40%{transform:scale(1)} }
-
-    footer {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #ccc;
-      text-align: center;
-    }
+    footer { margin-top: 2rem; font-size: 0.8rem; color: #ccc; text-align: center; }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">Pik<span>mi</span></div>
     <div class="tagline">Sube tus fotos y la IA elige la mejor ✨</div>
   </header>
-
   <div class="card">
     <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
       <div class="icon">📷</div>
@@ -249,14 +59,11 @@
       <p>Haz clic o arrastra tus fotos (mínimo 2, máximo 6)</p>
     </div>
     <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(event)">
-
     <div class="photos-grid" id="photosGrid"></div>
-
     <button class="btn-analyze" id="analyzeBtn" disabled onclick="analyzePhotos()">
       ✨ Elegir mi mejor foto
     </button>
   </div>
-
   <div class="result-card" id="resultCard">
     <div class="result-header">
       <span class="trophy">🏆</span>
@@ -265,97 +72,83 @@
     <p class="result-reason" id="resultReason"></p>
     <div class="scores-grid" id="scoresGrid"></div>
   </div>
-
   <footer>Pikmi usa IA para analizar tus fotos · Tus imágenes no se guardan</footer>
-
   <script>
     let photos = [];
-
     const uploadZone = document.getElementById('uploadZone');
     uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.style.background = '#fff0f5'; });
     uploadZone.addEventListener('dragleave', () => { uploadZone.style.background = '#fffafc'; });
-    uploadZone.addEventListener('drop', e => {
-      e.preventDefault();
-      uploadZone.style.background = '#fffafc';
-      handleFileList(e.dataTransfer.files);
-    });
-
+    uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.style.background = '#fffafc'; handleFileList(e.dataTransfer.files); });
     function handleFiles(e) { handleFileList(e.target.files); }
-
     function handleFileList(files) {
       const remaining = 6 - photos.length;
       Array.from(files).slice(0, remaining).forEach(file => {
         if (!file.type.startsWith('image/')) return;
         const reader = new FileReader();
         reader.onload = ev => {
-          photos.push({ src: ev.target.result, type: file.type });
-          renderGrid();
+          compressImage(ev.target.result, (compressed) => {
+            photos.push({ src: compressed, type: 'image/jpeg' });
+            renderGrid();
+          });
         };
         reader.readAsDataURL(file);
       });
     }
-
+    function compressImage(src, callback) {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX = 800;
+        let w = img.width, h = img.height;
+        if (w > h) { if (w > MAX) { h = h * MAX / w; w = MAX; } }
+        else { if (h > MAX) { w = w * MAX / h; h = MAX; } }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        callback(canvas.toDataURL('image/jpeg', 0.7));
+      };
+      img.src = src;
+    }
     function renderGrid() {
       const grid = document.getElementById('photosGrid');
       const btn = document.getElementById('analyzeBtn');
       document.getElementById('resultCard').classList.remove('visible');
-
       if (photos.length === 0) { grid.innerHTML = ''; btn.disabled = true; return; }
-
       grid.innerHTML = photos.map((p, i) => `
         <div class="photo-card" id="card-${i}">
           <img src="${p.src}" alt="Foto ${i+1}">
           <span class="best-badge">✓ mejor</span>
           <button class="remove-btn" onclick="removePhoto(${i})">✕</button>
-        </div>
-      `).join('');
-
+        </div>`).join('');
       btn.disabled = photos.length < 2;
     }
-
-    function removePhoto(i) {
-      photos.splice(i, 1);
-      renderGrid();
-    }
-
+    function removePhoto(i) { photos.splice(i, 1); renderGrid(); }
     async function analyzePhotos() {
       if (photos.length < 2) return;
-
       const btn = document.getElementById('analyzeBtn');
       btn.disabled = true;
       btn.innerHTML = '<div class="dots"><span></span><span></span><span></span></div>';
       document.querySelectorAll('.photo-card').forEach(c => c.classList.remove('winner'));
       document.getElementById('resultCard').classList.remove('visible');
-
       try {
         const response = await fetch('/api/analyze', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ photos: photos.map(p => ({ src: p.src, type: p.type })) })
         });
-
         const result = await response.json();
-
         if (result.error) throw new Error(result.error);
-
         document.getElementById(`card-${result.winner}`).classList.add('winner');
         document.getElementById('resultTitle').textContent = `La foto ${result.winner + 1} es tu mejor foto`;
         document.getElementById('resultReason').textContent = result.reason;
-
         document.getElementById('scoresGrid').innerHTML = result.scores.map((s, i) => `
           <div class="score-item ${i === result.winner ? 'best' : ''}">
             <div class="num">${s.score}</div>
             <div class="label">Foto ${i + 1}<br>${s.label}</div>
-          </div>
-        `).join('');
-
+          </div>`).join('');
         document.getElementById('resultCard').classList.add('visible');
-
       } catch (err) {
         alert('Hubo un error al analizar las fotos. Inténtalo de nuevo.');
-        console.error(err);
       }
-
       btn.innerHTML = '✨ Elegir mi mejor foto';
       btn.disabled = false;
     }
